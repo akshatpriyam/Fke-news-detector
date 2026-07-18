@@ -6,6 +6,9 @@ from sklearn.metrics import accuracy_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 # Read the dataset
 df = pd.read_csv("dataset/WELFake_Dataset.csv")
+print(df["label"].value_counts())
+
+print(df[["title", "label"]].head(10))
 
 # Show original shape
 print("Original Shape:", df.shape)
@@ -24,6 +27,8 @@ df = df[["content", "label"]]
 
 # Show cleaned shape
 print("Cleaned Shape:", df.shape)
+
+print(df["label"].value_counts())
 
 # Display first 5 rows
 print("\nFirst 5 rows after cleaning:\n")
@@ -65,6 +70,13 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
 print("\nModel Accuracy:", round(accuracy * 100, 2), "%")
+from sklearn.metrics import classification_report, confusion_matrix
+
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
 # Save the trained model
 joblib.dump(model, "model/fake_news_model.pkl")
 
