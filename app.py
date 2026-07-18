@@ -18,7 +18,7 @@ if st.button("Check News"):
         news_vector = tfidf.transform([news])
         prediction = model.predict(news_vector)
 
-        if prediction[0] == 0:
-            st.success("✅ This looks like REAL NEWS")
-        else:
+        if prediction[0] == 1:
             st.error("❌ This looks like FAKE NEWS")
+        else:
+            st.success("✅ This looks like REAL NEWS")
